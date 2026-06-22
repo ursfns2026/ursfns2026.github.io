@@ -1,60 +1,287 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>URS FNS 2026</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
-body{
+
+:root{
+    --navy:#1D3A8A;
+    --blue:#3465E1;
+    --light:#7FA4FF;
+    --red:#E5242A;
+}
+
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
     height:100vh;
+
+    overflow:hidden;
+
     display:flex;
     justify-content:center;
     align-items:center;
-    flex-direction:column;
-    background:#ffffff;
-    font-family:Arial,sans-serif;
+
+    background:
+    radial-gradient(circle at top left,#3465E1 0%,transparent 40%),
+    radial-gradient(circle at bottom right,#E5242A 0%,transparent 35%),
+    #050816;
+
+    font-family:'Poppins',sans-serif;
 }
 
-.loader{
-    width:70px;
-    height:70px;
-    border:6px solid #ddd;
-    border-top:6px solid #003366;
+/* GLASS BLOBS */
+
+.blob{
+
+    position:absolute;
+
     border-radius:50%;
-    animation:spin 1s linear infinite;
+
+    filter:blur(50px);
+
+    opacity:.45;
+
+    animation:float 10s ease-in-out infinite;
 }
 
-h1{
-    margin-top:25px;
+.blob1{
+
+    width:300px;
+    height:300px;
+
+    background:#3465E1;
+
+    top:-100px;
+    left:-80px;
 }
 
-p{
-    color:#666;
+.blob2{
+
+    width:260px;
+    height:260px;
+
+    background:#E5242A;
+
+    bottom:-80px;
+    right:-60px;
+
+    animation-delay:2s;
 }
 
-@keyframes spin{
-    from{transform:rotate(0deg);}
-    to{transform:rotate(360deg);}
+.blob3{
+
+    width:180px;
+    height:180px;
+
+    background:#7FA4FF;
+
+    top:60%;
+    left:20%;
+
+    animation-delay:4s;
 }
+
+@keyframes float{
+
+    0%,100%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-30px);
+    }
+}
+
+/* CONTENT */
+
+.container{
+
+    position:relative;
+
+    text-align:center;
+
+    z-index:10;
+}
+
+/* LOGO TEXT */
+
+.logo{
+
+    font-size:clamp(3rem,8vw,5rem);
+
+    font-weight:700;
+
+    letter-spacing:-2px;
+
+    color:white;
+
+    text-shadow:
+    0 0 25px rgba(52,101,225,.4);
+
+    animation:pulse 3s ease-in-out infinite;
+}
+
+.logo span{
+
+    color:var(--light);
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.03);
+    }
+}
+
+/* LOADING BAR */
+
+.bar{
+
+    width:280px;
+    height:5px;
+
+    margin:30px auto;
+
+    border-radius:999px;
+
+    background:
+    rgba(255,255,255,.08);
+
+    overflow:hidden;
+}
+
+.bar::after{
+
+    content:"";
+
+    display:block;
+
+    height:100%;
+
+    width:40%;
+
+    border-radius:999px;
+
+    background:
+    linear-gradient(
+    90deg,
+    #3465E1,
+    #7FA4FF,
+    #E5242A);
+
+    animation:load 2.5s ease-in-out infinite;
+}
+
+@keyframes load{
+
+    0%{
+        transform:translateX(-100%);
+    }
+
+    100%{
+        transform:translateX(300%);
+    }
+}
+
+/* PHRASES */
+
+.phrase{
+
+    font-size:1.1rem;
+
+    color:rgba(255,255,255,.85);
+
+    min-height:30px;
+
+    transition:.4s;
+}
+
+.tagline{
+
+    margin-top:14px;
+
+    font-size:.9rem;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    color:rgba(255,255,255,.45);
+}
+
 </style>
 </head>
-
 <body>
 
-<div class="loader"></div>
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="blob blob3"></div>
 
-<h1>URS FNS 2026</h1>
+<div class="container">
 
-<p>Loading Symposium Website....</p>
+    <div class="logo">
+        URS <span>FNS 26</span>
+    </div>
+
+    <div class="bar"></div>
+
+    <div class="phrase" id="phrase">
+        Exploring New Ideas...
+    </div>
+
+    <div class="tagline">
+        Undergraduate Research Symposium
+    </div>
+
+</div>
 
 <script>
-setTimeout(function() {
+
+const phrases = [
+
+"Exploring New Ideas...",
+"Connecting Researchers...",
+"Advancing Scientific Discovery...",
+"Building Tomorrow's Knowledge...",
+"Where Curiosity Meets Innovation...",
+"Preparing the Symposium Experience..."
+
+];
+
+let i = 0;
+
+setInterval(()=>{
+
+    i = (i + 1) % phrases.length;
+
+    document.getElementById("phrase").textContent =
+    phrases[i];
+
+},1800);
+
+setTimeout(function(){
+
     window.location.href =
     "https://sites.google.com/view/ursousl/home";
-}, 3000);
+
+},5000);
+
 </script>
 
 </body>
